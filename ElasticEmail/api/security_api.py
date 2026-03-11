@@ -3,7 +3,7 @@
 """
     Elastic Email REST API
 
-    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target=\"_blank\" href=\"https://app.elasticemail.com/marketing/settings/new/manage-api\">here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target=\"_blank\" href=\"https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme\">here</a>
+    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target='_blank' href='https://app.elasticemail.com/marketing/settings/new/manage-api'>here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target='_blank' href='https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme'>here</a>
 
     The version of the OpenAPI document: 4.0.0
     Contact: support@elasticemail.com
@@ -273,7 +273,9 @@ class SecurityApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -334,7 +336,7 @@ class SecurityApi:
     ) -> ApiKey:
         """Load ApiKey
 
-        Load your existing ApiKey info. Required Access Level: Security
+        Load your existing ApiKey info. Required Access Level: ViewAccessTokens
 
         :param name: Name of the ApiKey (required)
         :type name: str
@@ -405,7 +407,7 @@ class SecurityApi:
     ) -> ApiResponse[ApiKey]:
         """Load ApiKey
 
-        Load your existing ApiKey info. Required Access Level: Security
+        Load your existing ApiKey info. Required Access Level: ViewAccessTokens
 
         :param name: Name of the ApiKey (required)
         :type name: str
@@ -476,7 +478,7 @@ class SecurityApi:
     ) -> RESTResponseType:
         """Load ApiKey
 
-        Load your existing ApiKey info. Required Access Level: Security
+        Load your existing ApiKey info. Required Access Level: ViewAccessTokens
 
         :param name: Name of the ApiKey (required)
         :type name: str
@@ -542,7 +544,9 @@ class SecurityApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -559,11 +563,12 @@ class SecurityApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -817,7 +822,9 @@ class SecurityApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -832,11 +839,12 @@ class SecurityApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -894,7 +902,7 @@ class SecurityApi:
     ) -> List[ApiKey]:
         """List ApiKeys
 
-        List all your existing ApiKeys. Required Access Level: Security
+        List all your existing ApiKeys. Required Access Level: ViewAccessTokens
 
         :param subaccount: Email of the subaccount of which ApiKeys should be loaded
         :type subaccount: str
@@ -961,7 +969,7 @@ class SecurityApi:
     ) -> ApiResponse[List[ApiKey]]:
         """List ApiKeys
 
-        List all your existing ApiKeys. Required Access Level: Security
+        List all your existing ApiKeys. Required Access Level: ViewAccessTokens
 
         :param subaccount: Email of the subaccount of which ApiKeys should be loaded
         :type subaccount: str
@@ -1028,7 +1036,7 @@ class SecurityApi:
     ) -> RESTResponseType:
         """List ApiKeys
 
-        List all your existing ApiKeys. Required Access Level: Security
+        List all your existing ApiKeys. Required Access Level: ViewAccessTokens
 
         :param subaccount: Email of the subaccount of which ApiKeys should be loaded
         :type subaccount: str
@@ -1090,7 +1098,9 @@ class SecurityApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1105,11 +1115,12 @@ class SecurityApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1350,7 +1361,9 @@ class SecurityApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1363,11 +1376,12 @@ class SecurityApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -1634,7 +1648,9 @@ class SecurityApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1695,7 +1711,7 @@ class SecurityApi:
     ) -> SmtpCredentials:
         """Load SMTP Credential
 
-        Load your existing SMTP Credential info. Required Access Level: Security
+        Load your existing SMTP Credential info. Required Access Level: ViewAccessTokens
 
         :param name: Name of the SMTP Credential (required)
         :type name: str
@@ -1766,7 +1782,7 @@ class SecurityApi:
     ) -> ApiResponse[SmtpCredentials]:
         """Load SMTP Credential
 
-        Load your existing SMTP Credential info. Required Access Level: Security
+        Load your existing SMTP Credential info. Required Access Level: ViewAccessTokens
 
         :param name: Name of the SMTP Credential (required)
         :type name: str
@@ -1837,7 +1853,7 @@ class SecurityApi:
     ) -> RESTResponseType:
         """Load SMTP Credential
 
-        Load your existing SMTP Credential info. Required Access Level: Security
+        Load your existing SMTP Credential info. Required Access Level: ViewAccessTokens
 
         :param name: Name of the SMTP Credential (required)
         :type name: str
@@ -1903,7 +1919,9 @@ class SecurityApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1920,11 +1938,12 @@ class SecurityApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -2178,7 +2197,9 @@ class SecurityApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2193,11 +2214,12 @@ class SecurityApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -2255,7 +2277,7 @@ class SecurityApi:
     ) -> List[SmtpCredentials]:
         """List SMTP Credentials
 
-        List all your existing SMTP Credentials. Required Access Level: Security
+        List all your existing SMTP Credentials. Required Access Level: ViewAccessTokens
 
         :param subaccount: Email of the subaccount of which credentials should be listed
         :type subaccount: str
@@ -2322,7 +2344,7 @@ class SecurityApi:
     ) -> ApiResponse[List[SmtpCredentials]]:
         """List SMTP Credentials
 
-        List all your existing SMTP Credentials. Required Access Level: Security
+        List all your existing SMTP Credentials. Required Access Level: ViewAccessTokens
 
         :param subaccount: Email of the subaccount of which credentials should be listed
         :type subaccount: str
@@ -2389,7 +2411,7 @@ class SecurityApi:
     ) -> RESTResponseType:
         """List SMTP Credentials
 
-        List all your existing SMTP Credentials. Required Access Level: Security
+        List all your existing SMTP Credentials. Required Access Level: ViewAccessTokens
 
         :param subaccount: Email of the subaccount of which credentials should be listed
         :type subaccount: str
@@ -2451,7 +2473,9 @@ class SecurityApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2466,11 +2490,12 @@ class SecurityApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -2711,7 +2736,9 @@ class SecurityApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2724,11 +2751,12 @@ class SecurityApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **var_from** | **str** | Email address this email was sent from. | [optional] 
 **to** | **str** | Email address this email was sent to. | [optional] 
 **var_date** | **datetime** | Date the email was submitted. | [optional] 
-**status** | [**LogJobStatus**](LogJobStatus.md) |  | [optional] 
+**status** | [**LogJobStatus**](LogJobStatus.md) |  | [optional] [default to LogJobStatus.ALL]
 **status_name** | **str** | Name of email&#39;s status | [optional] 
 **status_change_date** | **datetime** | Date of last status change. | [optional] 
 **date_sent** | **datetime** | Date when the email was sent | [optional] 
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **error_message** | **str** | Detailed error or bounced message. | [optional] 
 **transaction_id** | **str** | ID number of transaction | [optional] 
 **envelope_from** | **str** | Envelope from address | [optional] 
-**error_category** | [**MessageCategoryEnum**](MessageCategoryEnum.md) |  | [optional] 
+**error_category** | [**MessageCategoryEnum**](MessageCategoryEnum.md) |  | [optional] [default to MessageCategoryEnum.UNKNOWN]
 
 ## Example
 

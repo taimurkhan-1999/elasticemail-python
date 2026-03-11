@@ -3,7 +3,7 @@
 """
     Elastic Email REST API
 
-    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target=\"_blank\" href=\"https://app.elasticemail.com/marketing/settings/new/manage-api\">here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target=\"_blank\" href=\"https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme\">here</a>
+    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target='_blank' href='https://app.elasticemail.com/marketing/settings/new/manage-api'>here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target='_blank' href='https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme'>here</a>
 
     The version of the OpenAPI document: 4.0.0
     Contact: support@elasticemail.com
@@ -31,9 +31,9 @@ class InboundRoute(BaseModel):
     """ # noqa: E501
     public_id: Optional[StrictStr] = Field(default=None, alias="PublicId")
     name: Optional[StrictStr] = Field(default=None, description="Name of this route", alias="Name")
-    filter_type: Optional[InboundRouteFilterType] = Field(default=None, alias="FilterType")
+    filter_type: Optional[InboundRouteFilterType] = Field(default=InboundRouteFilterType.EMAILADDRESS, alias="FilterType")
     filter: Optional[StrictStr] = Field(default=None, description="Filter of the inbound data", alias="Filter")
-    action_type: Optional[InboundRouteActionType] = Field(default=None, alias="ActionType")
+    action_type: Optional[InboundRouteActionType] = Field(default=InboundRouteActionType.FORWARDTOEMAIL, alias="ActionType")
     action_parameter: Optional[StrictStr] = Field(default=None, description="URL address or Email to notify about the inbound", alias="ActionParameter")
     sort_order: Optional[StrictInt] = Field(default=None, description="Place of this route in your routes queue's order", alias="SortOrder")
     __properties: ClassVar[List[str]] = ["PublicId", "Name", "FilterType", "Filter", "ActionType", "ActionParameter", "SortOrder"]
@@ -91,9 +91,9 @@ class InboundRoute(BaseModel):
         _obj = cls.model_validate({
             "PublicId": obj.get("PublicId"),
             "Name": obj.get("Name"),
-            "FilterType": obj.get("FilterType"),
+            "FilterType": obj.get("FilterType") if obj.get("FilterType") is not None else InboundRouteFilterType.EMAILADDRESS,
             "Filter": obj.get("Filter"),
-            "ActionType": obj.get("ActionType"),
+            "ActionType": obj.get("ActionType") if obj.get("ActionType") is not None else InboundRouteActionType.FORWARDTOEMAIL,
             "ActionParameter": obj.get("ActionParameter"),
             "SortOrder": obj.get("SortOrder")
         })

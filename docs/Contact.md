@@ -7,12 +7,13 @@ Contact
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email** | **str** | Proper email address. | [optional] 
-**status** | [**ContactStatus**](ContactStatus.md) |  | [optional] 
+**status** | [**ContactStatus**](ContactStatus.md) |  | [optional] [default to ContactStatus.TRANSACTIONAL]
 **first_name** | **str** | First name. | [optional] 
 **last_name** | **str** | Last name. | [optional] 
 **custom_fields** | **Dict[str, str]** | A key-value collection of custom contact fields which can be used in the system. | [optional] 
 **consent** | [**ConsentData**](ConsentData.md) |  | [optional] 
-**source** | [**ContactSource**](ContactSource.md) |  | [optional] 
+**source** | [**ContactSource**](ContactSource.md) |  | [optional] [default to ContactSource.DELIVERYAPI]
+**source_info** | **str** |  | [optional] 
 **date_added** | **datetime** | Date of creation in YYYY-MM-DDThh:ii:ss format | [optional] 
 **date_updated** | **datetime** | Last change date | [optional] 
 **status_change_date** | **datetime** | Date of last status change. | [optional] 

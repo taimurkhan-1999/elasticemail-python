@@ -3,7 +3,7 @@
 """
     Elastic Email REST API
 
-    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target=\"_blank\" href=\"https://app.elasticemail.com/marketing/settings/new/manage-api\">here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target=\"_blank\" href=\"https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme\">here</a>
+    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target='_blank' href='https://app.elasticemail.com/marketing/settings/new/manage-api'>here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target='_blank' href='https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme'>here</a>
 
     The version of the OpenAPI document: 4.0.0
     Contact: support@elasticemail.com
@@ -34,7 +34,7 @@ class VerificationFileResultDetails(BaseModel):
     verification_result: Optional[List[EmailValidationResult]] = Field(default=None, description="Verification result's details", alias="VerificationResult")
     verification_id: Optional[StrictStr] = Field(default=None, description="Identifier of this verification result", alias="VerificationID")
     filename: Optional[StrictStr] = Field(default=None, description="Origin file name", alias="Filename")
-    verification_status: Optional[VerificationStatus] = Field(default=None, alias="VerificationStatus")
+    verification_status: Optional[VerificationStatus] = Field(default=VerificationStatus.PROCESSING, alias="VerificationStatus")
     file_upload_result: Optional[FileUploadResult] = Field(default=None, alias="FileUploadResult")
     date_added: Optional[datetime] = Field(default=None, description="Date of creation in YYYY-MM-DDThh:ii:ss format", alias="DateAdded")
     source: Optional[StrictStr] = Field(default=None, description="Origin file extension", alias="Source")
@@ -82,9 +82,9 @@ class VerificationFileResultDetails(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in verification_result (list)
         _items = []
         if self.verification_result:
-            for _item in self.verification_result:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_verification_result in self.verification_result:
+                if _item_verification_result:
+                    _items.append(_item_verification_result.to_dict())
             _dict['VerificationResult'] = _items
         # override the default output from pydantic by calling `to_dict()` of file_upload_result
         if self.file_upload_result:
@@ -104,7 +104,7 @@ class VerificationFileResultDetails(BaseModel):
             "VerificationResult": [EmailValidationResult.from_dict(_item) for _item in obj["VerificationResult"]] if obj.get("VerificationResult") is not None else None,
             "VerificationID": obj.get("VerificationID"),
             "Filename": obj.get("Filename"),
-            "VerificationStatus": obj.get("VerificationStatus"),
+            "VerificationStatus": obj.get("VerificationStatus") if obj.get("VerificationStatus") is not None else VerificationStatus.PROCESSING,
             "FileUploadResult": FileUploadResult.from_dict(obj["FileUploadResult"]) if obj.get("FileUploadResult") is not None else None,
             "DateAdded": obj.get("DateAdded"),
             "Source": obj.get("Source")

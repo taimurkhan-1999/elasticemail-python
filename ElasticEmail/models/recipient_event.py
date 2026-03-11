@@ -3,7 +3,7 @@
 """
     Elastic Email REST API
 
-    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target=\"_blank\" href=\"https://app.elasticemail.com/marketing/settings/new/manage-api\">here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target=\"_blank\" href=\"https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme\">here</a>
+    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target='_blank' href='https://app.elasticemail.com/marketing/settings/new/manage-api'>here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target='_blank' href='https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme'>here</a>
 
     The version of the OpenAPI document: 4.0.0
     Contact: support@elasticemail.com
@@ -35,12 +35,12 @@ class RecipientEvent(BaseModel):
     from_email: Optional[StrictStr] = Field(default=None, description="Default From: email address.", alias="FromEmail")
     to: Optional[StrictStr] = Field(default=None, description="Ending date for search in YYYY-MM-DDThh:mm:ss format.", alias="To")
     subject: Optional[StrictStr] = Field(default=None, description="Default subject of email.", alias="Subject")
-    event_type: Optional[EventType] = Field(default=None, alias="EventType")
+    event_type: Optional[EventType] = Field(default=EventType.SUBMISSION, alias="EventType")
     event_date: Optional[datetime] = Field(default=None, description="Creation date", alias="EventDate")
     channel_name: Optional[StrictStr] = Field(default=None, description="Name of selected channel.", alias="ChannelName")
-    message_category: Optional[MessageCategory] = Field(default=None, alias="MessageCategory")
+    message_category: Optional[MessageCategory] = Field(default=MessageCategory.UNKNOWN, alias="MessageCategory")
     next_try_on: Optional[datetime] = Field(default=None, description="Date of next try", alias="NextTryOn")
-    message: Optional[StrictStr] = Field(default=None, description="Content of message, HTML encoded", alias="Message")
+    message: Optional[StrictStr] = Field(default=None, description="Error message if sending has failed (FailedAttempt or Bounce)", alias="Message")
     ip_address: Optional[StrictStr] = Field(default=None, description="IP which this email was sent through", alias="IPAddress")
     pool_name: Optional[StrictStr] = Field(default=None, description="Name of an IP pool this email was sent through", alias="PoolName")
     __properties: ClassVar[List[str]] = ["TransactionID", "MsgID", "FromEmail", "To", "Subject", "EventType", "EventDate", "ChannelName", "MessageCategory", "NextTryOn", "Message", "IPAddress", "PoolName"]
@@ -106,10 +106,10 @@ class RecipientEvent(BaseModel):
             "FromEmail": obj.get("FromEmail"),
             "To": obj.get("To"),
             "Subject": obj.get("Subject"),
-            "EventType": obj.get("EventType"),
+            "EventType": obj.get("EventType") if obj.get("EventType") is not None else EventType.SUBMISSION,
             "EventDate": obj.get("EventDate"),
             "ChannelName": obj.get("ChannelName"),
-            "MessageCategory": obj.get("MessageCategory"),
+            "MessageCategory": obj.get("MessageCategory") if obj.get("MessageCategory") is not None else MessageCategory.UNKNOWN,
             "NextTryOn": obj.get("NextTryOn"),
             "Message": obj.get("Message"),
             "IPAddress": obj.get("IPAddress"),

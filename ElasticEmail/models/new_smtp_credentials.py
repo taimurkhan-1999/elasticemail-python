@@ -3,7 +3,7 @@
 """
     Elastic Email REST API
 
-    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target=\"_blank\" href=\"https://app.elasticemail.com/marketing/settings/new/manage-api\">here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target=\"_blank\" href=\"https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme\">here</a>
+    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target='_blank' href='https://app.elasticemail.com/marketing/settings/new/manage-api'>here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target='_blank' href='https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme'>here</a>
 
     The version of the OpenAPI document: 4.0.0
     Contact: support@elasticemail.com
@@ -30,7 +30,7 @@ class NewSmtpCredentials(BaseModel):
     Newly generated SMTP Credentials with Token
     """ # noqa: E501
     token: Optional[StrictStr] = Field(default=None, description="Unique token to be used in the system", alias="Token")
-    access_level: Optional[AccessLevel] = Field(default=None, alias="AccessLevel")
+    access_level: Optional[AccessLevel] = Field(default=AccessLevel.NONE, alias="AccessLevel")
     name: Optional[StrictStr] = Field(default=None, description="Name of the key.", alias="Name")
     date_created: Optional[datetime] = Field(default=None, description="Date this SmtpCredential was created.", alias="DateCreated")
     last_use: Optional[datetime] = Field(default=None, description="Date this SmtpCredential was last used.", alias="LastUse")
@@ -100,7 +100,7 @@ class NewSmtpCredentials(BaseModel):
 
         _obj = cls.model_validate({
             "Token": obj.get("Token"),
-            "AccessLevel": obj.get("AccessLevel"),
+            "AccessLevel": obj.get("AccessLevel") if obj.get("AccessLevel") is not None else AccessLevel.NONE,
             "Name": obj.get("Name"),
             "DateCreated": obj.get("DateCreated"),
             "LastUse": obj.get("LastUse"),

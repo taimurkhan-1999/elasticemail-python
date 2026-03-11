@@ -3,7 +3,7 @@
 """
     Elastic Email REST API
 
-    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target=\"_blank\" href=\"https://app.elasticemail.com/marketing/settings/new/manage-api\">here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target=\"_blank\" href=\"https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme\">here</a>
+    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target='_blank' href='https://app.elasticemail.com/marketing/settings/new/manage-api'>here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target='_blank' href='https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme'>here</a>
 
     The version of the OpenAPI document: 4.0.0
     Contact: support@elasticemail.com
@@ -37,7 +37,7 @@ class SubAccountInfo(BaseModel):
     email_credits: Optional[StrictInt] = Field(default=None, description="Amount of email credits", alias="EmailCredits")
     total_emails_sent: Optional[StrictInt] = Field(default=None, description="Amount of emails sent from this Account", alias="TotalEmailsSent")
     reputation: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Numeric reputation", alias="Reputation")
-    status: Optional[AccountStatusEnum] = Field(default=None, alias="Status")
+    status: Optional[AccountStatusEnum] = Field(default=AccountStatusEnum.DISABLED, alias="Status")
     contacts_count: Optional[StrictInt] = Field(default=None, description="How many contacts this SubAccount has stored", alias="ContactsCount")
     __properties: ClassVar[List[str]] = ["PublicAccountID", "Email", "Settings", "LastActivity", "EmailCredits", "TotalEmailsSent", "Reputation", "Status", "ContactsCount"]
 
@@ -102,7 +102,7 @@ class SubAccountInfo(BaseModel):
             "EmailCredits": obj.get("EmailCredits"),
             "TotalEmailsSent": obj.get("TotalEmailsSent"),
             "Reputation": obj.get("Reputation"),
-            "Status": obj.get("Status"),
+            "Status": obj.get("Status") if obj.get("Status") is not None else AccountStatusEnum.DISABLED,
             "ContactsCount": obj.get("ContactsCount")
         })
         return _obj

@@ -6,7 +6,7 @@ Email body part with user-provided MIME type (text/html, text/plain, etc)
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**content_type** | [**BodyContentType**](BodyContentType.md) |  | 
+**content_type** | [**BodyContentType**](BodyContentType.md) |  | [default to BodyContentType.HTML]
 **content** | **str** | Actual content of the body part | [optional] 
 **charset** | **str** | Text value of charset encoding for example: iso-8859-1, windows-1251, utf-8, us-ascii, windows-1250 and more... | [optional] 
 

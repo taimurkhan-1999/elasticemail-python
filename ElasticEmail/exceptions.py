@@ -3,7 +3,7 @@
 """
     Elastic Email REST API
 
-    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target=\"_blank\" href=\"https://app.elasticemail.com/marketing/settings/new/manage-api\">here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target=\"_blank\" href=\"https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme\">here</a>
+    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target='_blank' href='https://app.elasticemail.com/marketing/settings/new/manage-api'>here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target='_blank' href='https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme'>here</a>
 
     The version of the OpenAPI document: 4.0.0
     Contact: support@elasticemail.com
@@ -151,6 +151,13 @@ class ApiException(OpenApiException):
         if http_resp.status == 404:
             raise NotFoundException(http_resp=http_resp, body=body, data=data)
 
+        # Added new conditions for 409 and 422
+        if http_resp.status == 409:
+            raise ConflictException(http_resp=http_resp, body=body, data=data)
+
+        if http_resp.status == 422:
+            raise UnprocessableEntityException(http_resp=http_resp, body=body, data=data)
+
         if 500 <= http_resp.status <= 599:
             raise ServiceException(http_resp=http_resp, body=body, data=data)
         raise ApiException(http_resp=http_resp, body=body, data=data)
@@ -186,6 +193,16 @@ class ForbiddenException(ApiException):
 
 
 class ServiceException(ApiException):
+    pass
+
+
+class ConflictException(ApiException):
+    """Exception for HTTP 409 Conflict."""
+    pass
+
+
+class UnprocessableEntityException(ApiException):
+    """Exception for HTTP 422 Unprocessable Entity."""
     pass
 
 

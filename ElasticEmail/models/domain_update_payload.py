@@ -3,7 +3,7 @@
 """
     Elastic Email REST API
 
-    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target=\"_blank\" href=\"https://app.elasticemail.com/marketing/settings/new/manage-api\">here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target=\"_blank\" href=\"https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme\">here</a>
+    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target='_blank' href='https://app.elasticemail.com/marketing/settings/new/manage-api'>here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target='_blank' href='https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme'>here</a>
 
     The version of the OpenAPI document: 4.0.0
     Contact: support@elasticemail.com
@@ -28,7 +28,7 @@ class DomainUpdatePayload(BaseModel):
     """
     DomainUpdatePayload
     """ # noqa: E501
-    certificate_status: Optional[CertificateValidationStatus] = Field(default=None, alias="CertificateStatus")
+    certificate_status: Optional[CertificateValidationStatus] = Field(default=CertificateValidationStatus.ERROROCCURED, alias="CertificateStatus")
     verp: Optional[StrictBool] = Field(default=None, alias="VERP")
     custom_bounces_domain: Optional[StrictStr] = Field(default=None, alias="CustomBouncesDomain")
     is_custom_bounces_domain_default: Optional[StrictBool] = Field(default=None, alias="IsCustomBouncesDomainDefault")
@@ -85,7 +85,7 @@ class DomainUpdatePayload(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "CertificateStatus": obj.get("CertificateStatus"),
+            "CertificateStatus": obj.get("CertificateStatus") if obj.get("CertificateStatus") is not None else CertificateValidationStatus.ERROROCCURED,
             "VERP": obj.get("VERP"),
             "CustomBouncesDomain": obj.get("CustomBouncesDomain"),
             "IsCustomBouncesDomainDefault": obj.get("IsCustomBouncesDomainDefault")

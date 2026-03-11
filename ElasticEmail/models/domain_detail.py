@@ -3,7 +3,7 @@
 """
     Elastic Email REST API
 
-    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target=\"_blank\" href=\"https://app.elasticemail.com/marketing/settings/new/manage-api\">here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target=\"_blank\" href=\"https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme\">here</a>
+    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target='_blank' href='https://app.elasticemail.com/marketing/settings/new/manage-api'>here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target='_blank' href='https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme'>here</a>
 
     The version of the OpenAPI document: 4.0.0
     Contact: support@elasticemail.com
@@ -39,16 +39,16 @@ class DomainDetail(BaseModel):
     dmarc: Optional[StrictBool] = Field(default=None, alias="DMARC")
     is_rewrite_domain_valid: Optional[StrictBool] = Field(default=None, description="True, if tracking CNAME record is verified", alias="IsRewriteDomainValid")
     verify: Optional[StrictBool] = Field(default=None, description="True, if DKIM, SPF, or tracking are still to be verified", alias="Verify")
-    type: Optional[TrackingType] = Field(default=None, alias="Type")
-    tracking_status: Optional[TrackingValidationStatus] = Field(default=None, alias="TrackingStatus")
-    certificate_status: Optional[CertificateValidationStatus] = Field(default=None, alias="CertificateStatus")
+    type: Optional[TrackingType] = Field(default=TrackingType.NONE, alias="Type")
+    tracking_status: Optional[TrackingValidationStatus] = Field(default=TrackingValidationStatus.VALIDATED, alias="TrackingStatus")
+    certificate_status: Optional[CertificateValidationStatus] = Field(default=CertificateValidationStatus.ERROROCCURED, alias="CertificateStatus")
     certificate_validation_error: Optional[StrictStr] = Field(default=None, alias="CertificateValidationError")
-    tracking_type_user_request: Optional[TrackingType] = Field(default=None, alias="TrackingTypeUserRequest")
+    tracking_type_user_request: Optional[TrackingType] = Field(default=TrackingType.NONE, alias="TrackingTypeUserRequest")
     verp: Optional[StrictBool] = Field(default=None, alias="VERP")
     custom_bounces_domain: Optional[StrictStr] = Field(default=None, alias="CustomBouncesDomain")
     is_custom_bounces_domain_default: Optional[StrictBool] = Field(default=None, alias="IsCustomBouncesDomainDefault")
     is_marked_for_deletion: Optional[StrictBool] = Field(default=None, alias="IsMarkedForDeletion")
-    ownership: Optional[DomainOwner] = Field(default=None, alias="Ownership")
+    ownership: Optional[DomainOwner] = Field(default=DomainOwner.CURRENT, alias="Ownership")
     __properties: ClassVar[List[str]] = ["Domain", "DefaultDomain", "Spf", "Dkim", "MX", "DMARC", "IsRewriteDomainValid", "Verify", "Type", "TrackingStatus", "CertificateStatus", "CertificateValidationError", "TrackingTypeUserRequest", "VERP", "CustomBouncesDomain", "IsCustomBouncesDomainDefault", "IsMarkedForDeletion", "Ownership"]
 
     model_config = ConfigDict(
@@ -110,16 +110,16 @@ class DomainDetail(BaseModel):
             "DMARC": obj.get("DMARC"),
             "IsRewriteDomainValid": obj.get("IsRewriteDomainValid"),
             "Verify": obj.get("Verify"),
-            "Type": obj.get("Type"),
-            "TrackingStatus": obj.get("TrackingStatus"),
-            "CertificateStatus": obj.get("CertificateStatus"),
+            "Type": obj.get("Type") if obj.get("Type") is not None else TrackingType.NONE,
+            "TrackingStatus": obj.get("TrackingStatus") if obj.get("TrackingStatus") is not None else TrackingValidationStatus.VALIDATED,
+            "CertificateStatus": obj.get("CertificateStatus") if obj.get("CertificateStatus") is not None else CertificateValidationStatus.ERROROCCURED,
             "CertificateValidationError": obj.get("CertificateValidationError"),
-            "TrackingTypeUserRequest": obj.get("TrackingTypeUserRequest"),
+            "TrackingTypeUserRequest": obj.get("TrackingTypeUserRequest") if obj.get("TrackingTypeUserRequest") is not None else TrackingType.NONE,
             "VERP": obj.get("VERP"),
             "CustomBouncesDomain": obj.get("CustomBouncesDomain"),
             "IsCustomBouncesDomainDefault": obj.get("IsCustomBouncesDomainDefault"),
             "IsMarkedForDeletion": obj.get("IsMarkedForDeletion"),
-            "Ownership": obj.get("Ownership")
+            "Ownership": obj.get("Ownership") if obj.get("Ownership") is not None else DomainOwner.CURRENT
         })
         return _obj
 

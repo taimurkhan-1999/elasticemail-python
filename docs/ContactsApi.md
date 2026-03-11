@@ -448,10 +448,10 @@ configuration.api_key['apikey'] = os.environ["API_KEY"]
 with ElasticEmail.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ElasticEmail.ContactsApi(api_client)
-    file_format = ElasticEmail.ExportFileFormats() # ExportFileFormats | Format of the exported file (optional)
+    file_format = Csv # ExportFileFormats | Format of the exported file (optional) (default to Csv)
     rule = 'Status%20=%20Engaged' # str | Query used for filtering. (optional)
     emails = ['[\"mail@contact.com,mail1@contact.com,mail2@contact.com\"]'] # List[str] | Comma delimited list of contact emails (optional)
-    compression_format = ElasticEmail.CompressionFormat() # CompressionFormat | FileResponse compression format. None or Zip. (optional)
+    compression_format = None # CompressionFormat | FileResponse compression format. None or Zip. (optional) (default to None)
     file_name = 'filename.txt' # str | Name of your file including extension. (optional)
 
     try:
@@ -470,10 +470,10 @@ with ElasticEmail.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_format** | [**ExportFileFormats**](.md)| Format of the exported file | [optional] 
+ **file_format** | [**ExportFileFormats**](.md)| Format of the exported file | [optional] [default to Csv]
  **rule** | **str**| Query used for filtering. | [optional] 
  **emails** | [**List[str]**](str.md)| Comma delimited list of contact emails | [optional] 
- **compression_format** | [**CompressionFormat**](.md)| FileResponse compression format. None or Zip. | [optional] 
+ **compression_format** | [**CompressionFormat**](.md)| FileResponse compression format. None or Zip. | [optional] [default to None]
  **file_name** | **str**| Name of your file including extension. | [optional] 
 
 ### Return type

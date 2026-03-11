@@ -6,12 +6,12 @@ Template info
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**template_type** | [**TemplateType**](TemplateType.md) |  | [optional] 
+**template_type** | [**TemplateType**](TemplateType.md) |  | [optional] [default to TemplateType.RAWHTML]
 **name** | **str** | Template name | [optional] 
 **date_added** | **datetime** | Date of creation in YYYY-MM-DDThh:ii:ss format | [optional] 
 **subject** | **str** | Default subject of email. | [optional] 
 **body** | [**List[BodyPart]**](BodyPart.md) | Email content of this template | [optional] 
-**template_scope** | [**TemplateScope**](TemplateScope.md) |  | [optional] 
+**template_scope** | [**TemplateScope**](TemplateScope.md) |  | [optional] [default to TemplateScope.PERSONAL]
 
 ## Example
 

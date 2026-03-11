@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email** | **str** | Proper email address. | 
-**status** | [**ContactStatus**](ContactStatus.md) |  | [optional] 
+**status** | [**ContactStatus**](ContactStatus.md) |  | [optional] [default to ContactStatus.TRANSACTIONAL]
 **first_name** | **str** | First name. | [optional] 
 **last_name** | **str** | Last name. | [optional] 
 **custom_fields** | **Dict[str, str]** | A key-value collection of custom contact fields which can be used in the system. Only already existing custom fields will be saved. | [optional] 

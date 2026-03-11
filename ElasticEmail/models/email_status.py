@@ -3,7 +3,7 @@
 """
     Elastic Email REST API
 
-    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target=\"_blank\" href=\"https://app.elasticemail.com/marketing/settings/new/manage-api\">here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target=\"_blank\" href=\"https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme\">here</a>
+    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target='_blank' href='https://app.elasticemail.com/marketing/settings/new/manage-api'>here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target='_blank' href='https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme'>here</a>
 
     The version of the OpenAPI document: 4.0.0
     Contact: support@elasticemail.com
@@ -33,7 +33,7 @@ class EmailStatus(BaseModel):
     var_from: Optional[StrictStr] = Field(default=None, description="Email address this email was sent from.", alias="From")
     to: Optional[StrictStr] = Field(default=None, description="Email address this email was sent to.", alias="To")
     var_date: Optional[datetime] = Field(default=None, description="Date the email was submitted.", alias="Date")
-    status: Optional[LogJobStatus] = Field(default=None, alias="Status")
+    status: Optional[LogJobStatus] = Field(default=LogJobStatus.ALL, alias="Status")
     status_name: Optional[StrictStr] = Field(default=None, description="Name of email's status", alias="StatusName")
     status_change_date: Optional[datetime] = Field(default=None, description="Date of last status change.", alias="StatusChangeDate")
     date_sent: Optional[datetime] = Field(default=None, description="Date when the email was sent", alias="DateSent")
@@ -42,7 +42,7 @@ class EmailStatus(BaseModel):
     error_message: Optional[StrictStr] = Field(default=None, description="Detailed error or bounced message.", alias="ErrorMessage")
     transaction_id: Optional[StrictStr] = Field(default=None, description="ID number of transaction", alias="TransactionID")
     envelope_from: Optional[StrictStr] = Field(default=None, description="Envelope from address", alias="EnvelopeFrom")
-    error_category: Optional[MessageCategoryEnum] = Field(default=None, alias="ErrorCategory")
+    error_category: Optional[MessageCategoryEnum] = Field(default=MessageCategoryEnum.UNKNOWN, alias="ErrorCategory")
     __properties: ClassVar[List[str]] = ["From", "To", "Date", "Status", "StatusName", "StatusChangeDate", "DateSent", "DateOpened", "DateClicked", "ErrorMessage", "TransactionID", "EnvelopeFrom", "ErrorCategory"]
 
     model_config = ConfigDict(
@@ -109,7 +109,7 @@ class EmailStatus(BaseModel):
             "From": obj.get("From"),
             "To": obj.get("To"),
             "Date": obj.get("Date"),
-            "Status": obj.get("Status"),
+            "Status": obj.get("Status") if obj.get("Status") is not None else LogJobStatus.ALL,
             "StatusName": obj.get("StatusName"),
             "StatusChangeDate": obj.get("StatusChangeDate"),
             "DateSent": obj.get("DateSent"),
@@ -118,7 +118,7 @@ class EmailStatus(BaseModel):
             "ErrorMessage": obj.get("ErrorMessage"),
             "TransactionID": obj.get("TransactionID"),
             "EnvelopeFrom": obj.get("EnvelopeFrom"),
-            "ErrorCategory": obj.get("ErrorCategory")
+            "ErrorCategory": obj.get("ErrorCategory") if obj.get("ErrorCategory") is not None else MessageCategoryEnum.UNKNOWN
         })
         return _obj
 

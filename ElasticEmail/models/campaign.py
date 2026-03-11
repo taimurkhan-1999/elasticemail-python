@@ -3,7 +3,7 @@
 """
     Elastic Email REST API
 
-    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target=\"_blank\" href=\"https://app.elasticemail.com/marketing/settings/new/manage-api\">here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target=\"_blank\" href=\"https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme\">here</a>
+    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target='_blank' href='https://app.elasticemail.com/marketing/settings/new/manage-api'>here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target='_blank' href='https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme'>here</a>
 
     The version of the OpenAPI document: 4.0.0
     Contact: support@elasticemail.com
@@ -33,10 +33,11 @@ class Campaign(BaseModel):
     """ # noqa: E501
     content: Optional[List[CampaignTemplate]] = Field(default=None, description="Campaign's email content. Provide multiple items to send an A/X Split Campaign", alias="Content")
     name: StrictStr = Field(description="Campaign name", alias="Name")
-    status: Optional[CampaignStatus] = Field(default=None, alias="Status")
+    status: Optional[CampaignStatus] = Field(default=CampaignStatus.DELETED, alias="Status")
     recipients: CampaignRecipient = Field(alias="Recipients")
+    excluded_recipients: Optional[CampaignRecipient] = Field(default=None, alias="ExcludedRecipients")
     options: Optional[CampaignOptions] = Field(default=None, alias="Options")
-    __properties: ClassVar[List[str]] = ["Content", "Name", "Status", "Recipients", "Options"]
+    __properties: ClassVar[List[str]] = ["Content", "Name", "Status", "Recipients", "ExcludedRecipients", "Options"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,13 +81,16 @@ class Campaign(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in content (list)
         _items = []
         if self.content:
-            for _item in self.content:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_content in self.content:
+                if _item_content:
+                    _items.append(_item_content.to_dict())
             _dict['Content'] = _items
         # override the default output from pydantic by calling `to_dict()` of recipients
         if self.recipients:
             _dict['Recipients'] = self.recipients.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of excluded_recipients
+        if self.excluded_recipients:
+            _dict['ExcludedRecipients'] = self.excluded_recipients.to_dict()
         # override the default output from pydantic by calling `to_dict()` of options
         if self.options:
             _dict['Options'] = self.options.to_dict()
@@ -104,8 +108,9 @@ class Campaign(BaseModel):
         _obj = cls.model_validate({
             "Content": [CampaignTemplate.from_dict(_item) for _item in obj["Content"]] if obj.get("Content") is not None else None,
             "Name": obj.get("Name"),
-            "Status": obj.get("Status"),
+            "Status": obj.get("Status") if obj.get("Status") is not None else CampaignStatus.DELETED,
             "Recipients": CampaignRecipient.from_dict(obj["Recipients"]) if obj.get("Recipients") is not None else None,
+            "ExcludedRecipients": CampaignRecipient.from_dict(obj["ExcludedRecipients"]) if obj.get("ExcludedRecipients") is not None else None,
             "Options": CampaignOptions.from_dict(obj["Options"]) if obj.get("Options") is not None else None
         })
         return _obj

@@ -14,16 +14,16 @@ Name | Type | Description | Notes
 **dmarc** | **bool** |  | [optional] 
 **is_rewrite_domain_valid** | **bool** | True, if tracking CNAME record is verified | [optional] 
 **verify** | **bool** | True, if DKIM, SPF, or tracking are still to be verified | [optional] 
-**type** | [**TrackingType**](TrackingType.md) |  | [optional] 
-**tracking_status** | [**TrackingValidationStatus**](TrackingValidationStatus.md) |  | [optional] 
-**certificate_status** | [**CertificateValidationStatus**](CertificateValidationStatus.md) |  | [optional] 
+**type** | [**TrackingType**](TrackingType.md) |  | [optional] [default to TrackingType.NONE]
+**tracking_status** | [**TrackingValidationStatus**](TrackingValidationStatus.md) |  | [optional] [default to TrackingValidationStatus.VALIDATED]
+**certificate_status** | [**CertificateValidationStatus**](CertificateValidationStatus.md) |  | [optional] [default to CertificateValidationStatus.ERROROCCURED]
 **certificate_validation_error** | **str** |  | [optional] 
-**tracking_type_user_request** | [**TrackingType**](TrackingType.md) |  | [optional] 
+**tracking_type_user_request** | [**TrackingType**](TrackingType.md) |  | [optional] [default to TrackingType.NONE]
 **verp** | **bool** |  | [optional] 
 **custom_bounces_domain** | **str** |  | [optional] 
 **is_custom_bounces_domain_default** | **bool** |  | [optional] 
 **is_marked_for_deletion** | **bool** |  | [optional] 
-**ownership** | [**DomainOwner**](DomainOwner.md) |  | [optional] 
+**ownership** | [**DomainOwner**](DomainOwner.md) |  | [optional] [default to DomainOwner.CURRENT]
 
 ## Example
 

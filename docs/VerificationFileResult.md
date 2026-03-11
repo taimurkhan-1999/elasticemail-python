@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **verification_id** | **str** | Identifier of this verification result | [optional] 
 **filename** | **str** | Origin file name | [optional] 
-**verification_status** | [**VerificationStatus**](VerificationStatus.md) |  | [optional] 
+**verification_status** | [**VerificationStatus**](VerificationStatus.md) |  | [optional] [default to VerificationStatus.PROCESSING]
 **file_upload_result** | [**FileUploadResult**](FileUploadResult.md) |  | [optional] 
 **date_added** | **datetime** | Date of creation in YYYY-MM-DDThh:ii:ss format | [optional] 
 **source** | **str** | Origin file extension | [optional] 

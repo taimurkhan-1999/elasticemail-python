@@ -6,7 +6,7 @@ Optional A/X split campaign options
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**optimize_for** | [**SplitOptimizationType**](SplitOptimizationType.md) |  | [optional] 
+**optimize_for** | [**SplitOptimizationType**](SplitOptimizationType.md) |  | [optional] [default to SplitOptimizationType.OPENS]
 **optimize_period_minutes** | **int** | For how long should the results be measured until determining the winner template (content) | [optional] 
 
 ## Example

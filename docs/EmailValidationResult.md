@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 **role** | **bool** | Is an email a role email (e.g. info@, noreply@ etc.) | [optional] 
 **reason** | **str** | All detected issues | [optional] 
 **date_added** | **datetime** | Added date | [optional] 
-**result** | [**EmailValidationStatus**](EmailValidationStatus.md) |  | [optional] 
+**result** | [**EmailValidationStatus**](EmailValidationStatus.md) |  | [optional] [default to EmailValidationStatus.NONE]
 **predicted_score** | **float** | Predicted score | [optional] 
-**predicted_status** | [**EmailPredictedValidationStatus**](EmailPredictedValidationStatus.md) |  | [optional] 
+**predicted_status** | [**EmailPredictedValidationStatus**](EmailPredictedValidationStatus.md) |  | [optional] [default to EmailPredictedValidationStatus.NONE]
 
 ## Example
 

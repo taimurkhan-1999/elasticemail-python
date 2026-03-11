@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **time_offset** | **int** | By how long should an e-mail be delayed (in minutes). Maximum is 35 days. | [optional] 
 **pool_name** | **str** | Name of your custom IP Pool to be used in the sending process | [optional] 
 **channel_name** | **str** | Name of selected channel. | [optional] 
-**encoding** | [**EncodingType**](EncodingType.md) |  | [optional] 
+**encoding** | [**EncodingType**](EncodingType.md) |  | [optional] [default to EncodingType.USERPROVIDED]
 **track_opens** | **bool** | Should the opens be tracked? If no value has been provided, Account&#39;s default setting will be used. | [optional] 
 **track_clicks** | **bool** | Should the clicks be tracked? If no value has been provided, Account&#39;s default setting will be used. | [optional] 
 

@@ -3,7 +3,7 @@
 """
     Elastic Email REST API
 
-    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target=\"_blank\" href=\"https://app.elasticemail.com/marketing/settings/new/manage-api\">here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target=\"_blank\" href=\"https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme\">here</a>
+    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target='_blank' href='https://app.elasticemail.com/marketing/settings/new/manage-api'>here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target='_blank' href='https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme'>here</a>
 
     The version of the OpenAPI document: 4.0.0
     Contact: support@elasticemail.com
@@ -30,7 +30,7 @@ class CampaignOptions(BaseModel):
     """
     Different send options for a Campaign
     """ # noqa: E501
-    delivery_optimization: Optional[DeliveryOptimizationType] = Field(default=None, alias="DeliveryOptimization")
+    delivery_optimization: Optional[DeliveryOptimizationType] = Field(default=DeliveryOptimizationType.NONE, alias="DeliveryOptimization")
     track_opens: Optional[StrictBool] = Field(default=None, description="Should the opens be tracked? If no value has been provided, Account's default setting will be used.", alias="TrackOpens")
     track_clicks: Optional[StrictBool] = Field(default=None, description="Should the clicks be tracked? If no value has been provided, Account's default setting will be used.", alias="TrackClicks")
     schedule_for: Optional[datetime] = Field(default=None, description="Date when this Campaign is scheduled to be sent on", alias="ScheduleFor")
@@ -108,7 +108,7 @@ class CampaignOptions(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "DeliveryOptimization": obj.get("DeliveryOptimization"),
+            "DeliveryOptimization": obj.get("DeliveryOptimization") if obj.get("DeliveryOptimization") is not None else DeliveryOptimizationType.NONE,
             "TrackOpens": obj.get("TrackOpens"),
             "TrackClicks": obj.get("TrackClicks"),
             "ScheduleFor": obj.get("ScheduleFor"),

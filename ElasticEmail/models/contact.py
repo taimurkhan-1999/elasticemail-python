@@ -3,7 +3,7 @@
 """
     Elastic Email REST API
 
-    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target=\"_blank\" href=\"https://app.elasticemail.com/marketing/settings/new/manage-api\">here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target=\"_blank\" href=\"https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme\">here</a>
+    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target='_blank' href='https://app.elasticemail.com/marketing/settings/new/manage-api'>here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target='_blank' href='https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme'>here</a>
 
     The version of the OpenAPI document: 4.0.0
     Contact: support@elasticemail.com
@@ -33,17 +33,18 @@ class Contact(BaseModel):
     Contact
     """ # noqa: E501
     email: Optional[StrictStr] = Field(default=None, description="Proper email address.", alias="Email")
-    status: Optional[ContactStatus] = Field(default=None, alias="Status")
+    status: Optional[ContactStatus] = Field(default=ContactStatus.TRANSACTIONAL, alias="Status")
     first_name: Optional[StrictStr] = Field(default=None, description="First name.", alias="FirstName")
     last_name: Optional[StrictStr] = Field(default=None, description="Last name.", alias="LastName")
     custom_fields: Optional[Dict[str, StrictStr]] = Field(default=None, description="A key-value collection of custom contact fields which can be used in the system.", alias="CustomFields")
     consent: Optional[ConsentData] = Field(default=None, alias="Consent")
-    source: Optional[ContactSource] = Field(default=None, alias="Source")
+    source: Optional[ContactSource] = Field(default=ContactSource.DELIVERYAPI, alias="Source")
+    source_info: Optional[StrictStr] = Field(default=None, alias="SourceInfo")
     date_added: Optional[datetime] = Field(default=None, description="Date of creation in YYYY-MM-DDThh:ii:ss format", alias="DateAdded")
     date_updated: Optional[datetime] = Field(default=None, description="Last change date", alias="DateUpdated")
     status_change_date: Optional[datetime] = Field(default=None, description="Date of last status change.", alias="StatusChangeDate")
     activity: Optional[ContactActivity] = Field(default=None, alias="Activity")
-    __properties: ClassVar[List[str]] = ["Email", "Status", "FirstName", "LastName", "CustomFields", "Consent", "Source", "DateAdded", "DateUpdated", "StatusChangeDate", "Activity"]
+    __properties: ClassVar[List[str]] = ["Email", "Status", "FirstName", "LastName", "CustomFields", "Consent", "Source", "SourceInfo", "DateAdded", "DateUpdated", "StatusChangeDate", "Activity"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -113,12 +114,13 @@ class Contact(BaseModel):
 
         _obj = cls.model_validate({
             "Email": obj.get("Email"),
-            "Status": obj.get("Status"),
+            "Status": obj.get("Status") if obj.get("Status") is not None else ContactStatus.TRANSACTIONAL,
             "FirstName": obj.get("FirstName"),
             "LastName": obj.get("LastName"),
             "CustomFields": obj.get("CustomFields"),
             "Consent": ConsentData.from_dict(obj["Consent"]) if obj.get("Consent") is not None else None,
-            "Source": obj.get("Source"),
+            "Source": obj.get("Source") if obj.get("Source") is not None else ContactSource.DELIVERYAPI,
+            "SourceInfo": obj.get("SourceInfo"),
             "DateAdded": obj.get("DateAdded"),
             "DateUpdated": obj.get("DateUpdated"),
             "StatusChangeDate": obj.get("StatusChangeDate"),

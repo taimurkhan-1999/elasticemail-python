@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **email_credits** | **int** | Amount of email credits | [optional] 
 **total_emails_sent** | **int** | Amount of emails sent from this Account | [optional] 
 **reputation** | **float** | Numeric reputation | [optional] 
-**status** | [**AccountStatusEnum**](AccountStatusEnum.md) |  | [optional] 
+**status** | [**AccountStatusEnum**](AccountStatusEnum.md) |  | [optional] [default to AccountStatusEnum.DISABLED]
 **contacts_count** | **int** | How many contacts this SubAccount has stored | [optional] 
 
 ## Example

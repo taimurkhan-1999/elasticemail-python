@@ -6,7 +6,7 @@ Different send options for a Campaign
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**delivery_optimization** | [**DeliveryOptimizationType**](DeliveryOptimizationType.md) |  | [optional] 
+**delivery_optimization** | [**DeliveryOptimizationType**](DeliveryOptimizationType.md) |  | [optional] [default to DeliveryOptimizationType.NONE]
 **track_opens** | **bool** | Should the opens be tracked? If no value has been provided, Account&#39;s default setting will be used. | [optional] 
 **track_clicks** | **bool** | Should the clicks be tracked? If no value has been provided, Account&#39;s default setting will be used. | [optional] 
 **schedule_for** | **datetime** | Date when this Campaign is scheduled to be sent on | [optional] 

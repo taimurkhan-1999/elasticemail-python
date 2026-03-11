@@ -55,7 +55,7 @@ with ElasticEmail.ApiClient(configuration) as api_client:
     transactionid = 'TransactionID' # str | ID number of transaction
     var_from = '2013-10-20T19:20:30+01:00' # datetime | Starting date for search in YYYY-MM-DDThh:mm:ss format. (optional)
     to = '2013-10-20T19:20:30+01:00' # datetime | Ending date for search in YYYY-MM-DDThh:mm:ss format. (optional)
-    order_by = ElasticEmail.EventsOrderBy() # EventsOrderBy |  (optional)
+    order_by = DateDescending # EventsOrderBy |  (optional) (default to DateDescending)
     limit = 100 # int | Maximum number of returned items. (optional)
     offset = 20 # int | How many items should be returned ahead. (optional)
 
@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
  **transactionid** | **str**| ID number of transaction | 
  **var_from** | **datetime**| Starting date for search in YYYY-MM-DDThh:mm:ss format. | [optional] 
  **to** | **datetime**| Ending date for search in YYYY-MM-DDThh:mm:ss format. | [optional] 
- **order_by** | [**EventsOrderBy**](.md)|  | [optional] 
+ **order_by** | [**EventsOrderBy**](.md)|  | [optional] [default to DateDescending]
  **limit** | **int**| Maximum number of returned items. | [optional] 
  **offset** | **int**| How many items should be returned ahead. | [optional] 
 
@@ -148,8 +148,8 @@ with ElasticEmail.ApiClient(configuration) as api_client:
     event_types = [ElasticEmail.EventType()] # List[EventType] | Types of Events to return (optional)
     var_from = '2013-10-20T19:20:30+01:00' # datetime | Starting date for search in YYYY-MM-DDThh:mm:ss format. (optional)
     to = '2013-10-20T19:20:30+01:00' # datetime | Ending date for search in YYYY-MM-DDThh:mm:ss format. (optional)
-    file_format = ElasticEmail.ExportFileFormats() # ExportFileFormats | Format of the exported file (optional)
-    compression_format = ElasticEmail.CompressionFormat() # CompressionFormat | FileResponse compression format. None or Zip. (optional)
+    file_format = Csv # ExportFileFormats | Format of the exported file (optional) (default to Csv)
+    compression_format = None # CompressionFormat | FileResponse compression format. None or Zip. (optional) (default to None)
     file_name = 'filename.txt' # str | Name of your file including extension. (optional)
 
     try:
@@ -172,8 +172,8 @@ Name | Type | Description  | Notes
  **event_types** | [**List[EventType]**](EventType.md)| Types of Events to return | [optional] 
  **var_from** | **datetime**| Starting date for search in YYYY-MM-DDThh:mm:ss format. | [optional] 
  **to** | **datetime**| Ending date for search in YYYY-MM-DDThh:mm:ss format. | [optional] 
- **file_format** | [**ExportFileFormats**](.md)| Format of the exported file | [optional] 
- **compression_format** | [**CompressionFormat**](.md)| FileResponse compression format. None or Zip. | [optional] 
+ **file_format** | [**ExportFileFormats**](.md)| Format of the exported file | [optional] [default to Csv]
+ **compression_format** | [**CompressionFormat**](.md)| FileResponse compression format. None or Zip. | [optional] [default to None]
  **file_name** | **str**| Name of your file including extension. | [optional] 
 
 ### Return type
@@ -241,7 +241,7 @@ with ElasticEmail.ApiClient(configuration) as api_client:
     event_types = [ElasticEmail.EventType()] # List[EventType] | Types of Events to return (optional)
     var_from = '2013-10-20T19:20:30+01:00' # datetime | Starting date for search in YYYY-MM-DDThh:mm:ss format. (optional)
     to = '2013-10-20T19:20:30+01:00' # datetime | Ending date for search in YYYY-MM-DDThh:mm:ss format. (optional)
-    order_by = ElasticEmail.EventsOrderBy() # EventsOrderBy |  (optional)
+    order_by = DateDescending # EventsOrderBy |  (optional) (default to DateDescending)
     limit = 56 # int | How many items to load. Maximum for this request is 1000 items (optional)
     offset = 20 # int | How many items should be returned ahead. (optional)
 
@@ -265,7 +265,7 @@ Name | Type | Description  | Notes
  **event_types** | [**List[EventType]**](EventType.md)| Types of Events to return | [optional] 
  **var_from** | **datetime**| Starting date for search in YYYY-MM-DDThh:mm:ss format. | [optional] 
  **to** | **datetime**| Ending date for search in YYYY-MM-DDThh:mm:ss format. | [optional] 
- **order_by** | [**EventsOrderBy**](.md)|  | [optional] 
+ **order_by** | [**EventsOrderBy**](.md)|  | [optional] [default to DateDescending]
  **limit** | **int**| How many items to load. Maximum for this request is 1000 items | [optional] 
  **offset** | **int**| How many items should be returned ahead. | [optional] 
 
@@ -492,8 +492,8 @@ with ElasticEmail.ApiClient(configuration) as api_client:
     event_types = [ElasticEmail.EventType()] # List[EventType] | Types of Events to return (optional)
     var_from = '2013-10-20T19:20:30+01:00' # datetime | Starting date for search in YYYY-MM-DDThh:mm:ss format. (optional)
     to = '2013-10-20T19:20:30+01:00' # datetime | Ending date for search in YYYY-MM-DDThh:mm:ss format. (optional)
-    file_format = ElasticEmail.ExportFileFormats() # ExportFileFormats | Format of the exported file (optional)
-    compression_format = ElasticEmail.CompressionFormat() # CompressionFormat | FileResponse compression format. None or Zip. (optional)
+    file_format = Csv # ExportFileFormats | Format of the exported file (optional) (default to Csv)
+    compression_format = None # CompressionFormat | FileResponse compression format. None or Zip. (optional) (default to None)
     file_name = 'filename.txt' # str | Name of your file including extension. (optional)
 
     try:
@@ -515,8 +515,8 @@ Name | Type | Description  | Notes
  **event_types** | [**List[EventType]**](EventType.md)| Types of Events to return | [optional] 
  **var_from** | **datetime**| Starting date for search in YYYY-MM-DDThh:mm:ss format. | [optional] 
  **to** | **datetime**| Ending date for search in YYYY-MM-DDThh:mm:ss format. | [optional] 
- **file_format** | [**ExportFileFormats**](.md)| Format of the exported file | [optional] 
- **compression_format** | [**CompressionFormat**](.md)| FileResponse compression format. None or Zip. | [optional] 
+ **file_format** | [**ExportFileFormats**](.md)| Format of the exported file | [optional] [default to Csv]
+ **compression_format** | [**CompressionFormat**](.md)| FileResponse compression format. None or Zip. | [optional] [default to None]
  **file_name** | **str**| Name of your file including extension. | [optional] 
 
 ### Return type
@@ -583,7 +583,7 @@ with ElasticEmail.ApiClient(configuration) as api_client:
     event_types = [ElasticEmail.EventType()] # List[EventType] | Types of Events to return (optional)
     var_from = '2013-10-20T19:20:30+01:00' # datetime | Starting date for search in YYYY-MM-DDThh:mm:ss format. (optional)
     to = '2013-10-20T19:20:30+01:00' # datetime | Ending date for search in YYYY-MM-DDThh:mm:ss format. (optional)
-    order_by = ElasticEmail.EventsOrderBy() # EventsOrderBy |  (optional)
+    order_by = DateDescending # EventsOrderBy |  (optional) (default to DateDescending)
     limit = 56 # int | How many items to load. Maximum for this request is 1000 items (optional)
     offset = 20 # int | How many items should be returned ahead. (optional)
 
@@ -606,7 +606,7 @@ Name | Type | Description  | Notes
  **event_types** | [**List[EventType]**](EventType.md)| Types of Events to return | [optional] 
  **var_from** | **datetime**| Starting date for search in YYYY-MM-DDThh:mm:ss format. | [optional] 
  **to** | **datetime**| Ending date for search in YYYY-MM-DDThh:mm:ss format. | [optional] 
- **order_by** | [**EventsOrderBy**](.md)|  | [optional] 
+ **order_by** | [**EventsOrderBy**](.md)|  | [optional] [default to DateDescending]
  **limit** | **int**| How many items to load. Maximum for this request is 1000 items | [optional] 
  **offset** | **int**| How many items should be returned ahead. | [optional] 
 

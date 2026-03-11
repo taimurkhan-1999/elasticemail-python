@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **consent_ip** | **str** | IP address of consent to send this contact(s) your email. If not provided your current public IP address is used for consent. | [optional] 
 **consent_date** | **datetime** | Date of consent to send this contact(s) your email. If not provided current date is used for consent. | [optional] 
-**consent_tracking** | [**ConsentTracking**](ConsentTracking.md) |  | [optional] 
+**consent_tracking** | [**ConsentTracking**](ConsentTracking.md) |  | [optional] [default to ConsentTracking.UNKNOWN]
 
 ## Example
 

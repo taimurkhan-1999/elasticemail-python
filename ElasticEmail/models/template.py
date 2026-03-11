@@ -3,7 +3,7 @@
 """
     Elastic Email REST API
 
-    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target=\"_blank\" href=\"https://app.elasticemail.com/marketing/settings/new/manage-api\">here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target=\"_blank\" href=\"https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme\">here</a>
+    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target='_blank' href='https://app.elasticemail.com/marketing/settings/new/manage-api'>here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target='_blank' href='https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme'>here</a>
 
     The version of the OpenAPI document: 4.0.0
     Contact: support@elasticemail.com
@@ -31,12 +31,12 @@ class Template(BaseModel):
     """
     Template info
     """ # noqa: E501
-    template_type: Optional[TemplateType] = Field(default=None, alias="TemplateType")
+    template_type: Optional[TemplateType] = Field(default=TemplateType.RAWHTML, alias="TemplateType")
     name: Optional[StrictStr] = Field(default=None, description="Template name", alias="Name")
     date_added: Optional[datetime] = Field(default=None, description="Date of creation in YYYY-MM-DDThh:ii:ss format", alias="DateAdded")
     subject: Optional[StrictStr] = Field(default=None, description="Default subject of email.", alias="Subject")
     body: Optional[List[BodyPart]] = Field(default=None, description="Email content of this template", alias="Body")
-    template_scope: Optional[TemplateScope] = Field(default=None, alias="TemplateScope")
+    template_scope: Optional[TemplateScope] = Field(default=TemplateScope.PERSONAL, alias="TemplateScope")
     __properties: ClassVar[List[str]] = ["TemplateType", "Name", "DateAdded", "Subject", "Body", "TemplateScope"]
 
     model_config = ConfigDict(
@@ -81,9 +81,9 @@ class Template(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of each item in body (list)
         _items = []
         if self.body:
-            for _item in self.body:
-                if _item:
-                    _items.append(_item.to_dict())
+            for _item_body in self.body:
+                if _item_body:
+                    _items.append(_item_body.to_dict())
             _dict['Body'] = _items
         return _dict
 
@@ -97,12 +97,12 @@ class Template(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "TemplateType": obj.get("TemplateType"),
+            "TemplateType": obj.get("TemplateType") if obj.get("TemplateType") is not None else TemplateType.RAWHTML,
             "Name": obj.get("Name"),
             "DateAdded": obj.get("DateAdded"),
             "Subject": obj.get("Subject"),
             "Body": [BodyPart.from_dict(_item) for _item in obj["Body"]] if obj.get("Body") is not None else None,
-            "TemplateScope": obj.get("TemplateScope")
+            "TemplateScope": obj.get("TemplateScope") if obj.get("TemplateScope") is not None else TemplateScope.PERSONAL
         })
         return _obj
 

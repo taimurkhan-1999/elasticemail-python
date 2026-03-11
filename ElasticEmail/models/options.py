@@ -3,7 +3,7 @@
 """
     Elastic Email REST API
 
-    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target=\"_blank\" href=\"https://app.elasticemail.com/marketing/settings/new/manage-api\">here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target=\"_blank\" href=\"https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme\">here</a>
+    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target='_blank' href='https://app.elasticemail.com/marketing/settings/new/manage-api'>here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target='_blank' href='https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme'>here</a>
 
     The version of the OpenAPI document: 4.0.0
     Contact: support@elasticemail.com
@@ -31,7 +31,7 @@ class Options(BaseModel):
     time_offset: Optional[StrictInt] = Field(default=None, description="By how long should an e-mail be delayed (in minutes). Maximum is 35 days.", alias="TimeOffset")
     pool_name: Optional[StrictStr] = Field(default=None, description="Name of your custom IP Pool to be used in the sending process", alias="PoolName")
     channel_name: Optional[StrictStr] = Field(default=None, description="Name of selected channel.", alias="ChannelName")
-    encoding: Optional[EncodingType] = Field(default=None, alias="Encoding")
+    encoding: Optional[EncodingType] = Field(default=EncodingType.USERPROVIDED, alias="Encoding")
     track_opens: Optional[StrictBool] = Field(default=None, description="Should the opens be tracked? If no value has been provided, Account's default setting will be used.", alias="TrackOpens")
     track_clicks: Optional[StrictBool] = Field(default=None, description="Should the clicks be tracked? If no value has been provided, Account's default setting will be used.", alias="TrackClicks")
     __properties: ClassVar[List[str]] = ["TimeOffset", "PoolName", "ChannelName", "Encoding", "TrackOpens", "TrackClicks"]
@@ -105,7 +105,7 @@ class Options(BaseModel):
             "TimeOffset": obj.get("TimeOffset"),
             "PoolName": obj.get("PoolName"),
             "ChannelName": obj.get("ChannelName"),
-            "Encoding": obj.get("Encoding"),
+            "Encoding": obj.get("Encoding") if obj.get("Encoding") is not None else EncodingType.USERPROVIDED,
             "TrackOpens": obj.get("TrackOpens"),
             "TrackClicks": obj.get("TrackClicks")
         })

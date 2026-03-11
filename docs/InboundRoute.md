@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **public_id** | **str** |  | [optional] 
 **name** | **str** | Name of this route | [optional] 
-**filter_type** | [**InboundRouteFilterType**](InboundRouteFilterType.md) |  | [optional] 
+**filter_type** | [**InboundRouteFilterType**](InboundRouteFilterType.md) |  | [optional] [default to InboundRouteFilterType.EMAILADDRESS]
 **filter** | **str** | Filter of the inbound data | [optional] 
-**action_type** | [**InboundRouteActionType**](InboundRouteActionType.md) |  | [optional] 
+**action_type** | [**InboundRouteActionType**](InboundRouteActionType.md) |  | [optional] [default to InboundRouteActionType.FORWARDTOEMAIL]
 **action_parameter** | **str** | URL address or Email to notify about the inbound | [optional] 
 **sort_order** | **int** | Place of this route in your routes queue&#39;s order | [optional] 
 

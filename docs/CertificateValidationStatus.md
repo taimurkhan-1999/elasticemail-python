@@ -1,10 +1,15 @@
 # CertificateValidationStatus
 
 
-## Properties
+## Enum
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+* `ERROROCCURED` (value: `'ErrorOccured'`)
+
+* `CERTNOTSET` (value: `'CertNotSet'`)
+
+* `VALID` (value: `'Valid'`)
+
+* `NOTVALID` (value: `'NotValid'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

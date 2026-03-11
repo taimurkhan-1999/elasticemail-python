@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **name** | **str** | Template name | 
 **subject** | **str** | Default subject of email. | [optional] 
 **body** | [**List[BodyPart]**](BodyPart.md) | Email content of this template | [optional] 
-**template_scope** | [**TemplateScope**](TemplateScope.md) |  | [optional] 
+**template_scope** | [**TemplateScope**](TemplateScope.md) |  | [optional] [default to TemplateScope.PERSONAL]
 
 ## Example
 

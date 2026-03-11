@@ -3,7 +3,7 @@
 """
     Elastic Email REST API
 
-    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target=\"_blank\" href=\"https://app.elasticemail.com/marketing/settings/new/manage-api\">here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target=\"_blank\" href=\"https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme\">here</a>
+    This API is based on the REST API architecture, allowing the user to easily manage their data with this resource-based approach.    Every API call is established on which specific request type (GET, POST, PUT, DELETE) will be used.    The API has a limit of 20 concurrent connections and a hard timeout of 600 seconds per request.    To start using this API, you will need your Access Token (available <a target='_blank' href='https://app.elasticemail.com/marketing/settings/new/manage-api'>here</a>). Remember to keep it safe. Required access levels are listed in the given request’s description.    Downloadable library clients can be found in our Github repository <a target='_blank' href='https://github.com/ElasticEmail?tab=repositories&q=%22rest+api%22+in%3Areadme'>here</a>
 
     The version of the OpenAPI document: 4.0.0
     Contact: support@elasticemail.com
@@ -18,7 +18,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBytes, StrictInt, StrictStr
-from typing import List, Optional, Union
+from typing import List, Optional, Tuple, Union
 from typing_extensions import Annotated
 from ElasticEmail.models.email_validation_result import EmailValidationResult
 from ElasticEmail.models.verification_file_result import VerificationFileResult
@@ -257,7 +257,9 @@ class VerificationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -313,7 +315,7 @@ class VerificationsApi:
     ) -> EmailValidationResult:
         """Get Email Verification Result
 
-        Returns a result of verified email. Required Access Level: VerifyEmails
+        Returns a result of verified email. Required Access Level: ViewVerifyEmails
 
         :param email: Email address to view verification result of (required)
         :type email: str
@@ -380,7 +382,7 @@ class VerificationsApi:
     ) -> ApiResponse[EmailValidationResult]:
         """Get Email Verification Result
 
-        Returns a result of verified email. Required Access Level: VerifyEmails
+        Returns a result of verified email. Required Access Level: ViewVerifyEmails
 
         :param email: Email address to view verification result of (required)
         :type email: str
@@ -447,7 +449,7 @@ class VerificationsApi:
     ) -> RESTResponseType:
         """Get Email Verification Result
 
-        Returns a result of verified email. Required Access Level: VerifyEmails
+        Returns a result of verified email. Required Access Level: ViewVerifyEmails
 
         :param email: Email address to view verification result of (required)
         :type email: str
@@ -509,7 +511,9 @@ class VerificationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -522,11 +526,12 @@ class VerificationsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -767,7 +772,9 @@ class VerificationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -780,11 +787,12 @@ class VerificationsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1025,7 +1033,9 @@ class VerificationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1081,7 +1091,7 @@ class VerificationsApi:
     ) -> bytearray:
         """Download File Verification Result
 
-        Download verification results as a ZIP file. Required Access Level: VerifyEmails
+        Download verification results as a ZIP file. Required Access Level: ViewVerifyEmails
 
         :param id: Verification ID to download (required)
         :type id: str
@@ -1148,7 +1158,7 @@ class VerificationsApi:
     ) -> ApiResponse[bytearray]:
         """Download File Verification Result
 
-        Download verification results as a ZIP file. Required Access Level: VerifyEmails
+        Download verification results as a ZIP file. Required Access Level: ViewVerifyEmails
 
         :param id: Verification ID to download (required)
         :type id: str
@@ -1215,7 +1225,7 @@ class VerificationsApi:
     ) -> RESTResponseType:
         """Download File Verification Result
 
-        Download verification results as a ZIP file. Required Access Level: VerifyEmails
+        Download verification results as a ZIP file. Required Access Level: ViewVerifyEmails
 
         :param id: Verification ID to download (required)
         :type id: str
@@ -1277,7 +1287,9 @@ class VerificationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1290,11 +1302,12 @@ class VerificationsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/*'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/*'
+                ]
+            )
 
 
         # authentication setting
@@ -1341,7 +1354,7 @@ class VerificationsApi:
     ) -> VerificationFileResultDetails:
         """Get Detailed File Verification Result
 
-        Returns status and results (if verified) of file with given ID. Required Access Level: VerifyEmails
+        Returns status and results (if verified) of file with given ID. Required Access Level: ViewVerifyEmails
 
         :param id: ID of the Verification to display status of (required)
         :type id: str
@@ -1416,7 +1429,7 @@ class VerificationsApi:
     ) -> ApiResponse[VerificationFileResultDetails]:
         """Get Detailed File Verification Result
 
-        Returns status and results (if verified) of file with given ID. Required Access Level: VerifyEmails
+        Returns status and results (if verified) of file with given ID. Required Access Level: ViewVerifyEmails
 
         :param id: ID of the Verification to display status of (required)
         :type id: str
@@ -1491,7 +1504,7 @@ class VerificationsApi:
     ) -> RESTResponseType:
         """Get Detailed File Verification Result
 
-        Returns status and results (if verified) of file with given ID. Required Access Level: VerifyEmails
+        Returns status and results (if verified) of file with given ID. Required Access Level: ViewVerifyEmails
 
         :param id: ID of the Verification to display status of (required)
         :type id: str
@@ -1561,7 +1574,9 @@ class VerificationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1582,11 +1597,12 @@ class VerificationsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1827,7 +1843,9 @@ class VerificationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1867,7 +1885,7 @@ class VerificationsApi:
     @validate_call
     def verifications_files_post(
         self,
-        file: Optional[Union[StrictBytes, StrictStr]] = None,
+        file: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1934,7 +1952,7 @@ class VerificationsApi:
     @validate_call
     def verifications_files_post_with_http_info(
         self,
-        file: Optional[Union[StrictBytes, StrictStr]] = None,
+        file: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2001,7 +2019,7 @@ class VerificationsApi:
     @validate_call
     def verifications_files_post_without_preload_content(
         self,
-        file: Optional[Union[StrictBytes, StrictStr]] = None,
+        file: Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2079,7 +2097,9 @@ class VerificationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2092,11 +2112,12 @@ class VerificationsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -2153,7 +2174,7 @@ class VerificationsApi:
     ) -> List[VerificationFileResult]:
         """Get Files Verification Results
 
-        Returns a list of uploaded files, their statuses and results. Required Access Level: VerifyEmails
+        Returns a list of uploaded files, their statuses and results. Required Access Level: ViewVerifyEmails
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2216,7 +2237,7 @@ class VerificationsApi:
     ) -> ApiResponse[List[VerificationFileResult]]:
         """Get Files Verification Results
 
-        Returns a list of uploaded files, their statuses and results. Required Access Level: VerifyEmails
+        Returns a list of uploaded files, their statuses and results. Required Access Level: ViewVerifyEmails
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2279,7 +2300,7 @@ class VerificationsApi:
     ) -> RESTResponseType:
         """Get Files Verification Results
 
-        Returns a list of uploaded files, their statuses and results. Required Access Level: VerifyEmails
+        Returns a list of uploaded files, their statuses and results. Required Access Level: ViewVerifyEmails
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2337,7 +2358,9 @@ class VerificationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2348,11 +2371,12 @@ class VerificationsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -2398,7 +2422,7 @@ class VerificationsApi:
     ) -> List[EmailValidationResult]:
         """Get Emails Verification Results
 
-        Returns a results of all verified single emails. Required Access Level: VerifyEmails
+        Returns a results of all verified single emails. Required Access Level: ViewVerifyEmails
 
         :param limit: Maximum number of returned items.
         :type limit: int
@@ -2469,7 +2493,7 @@ class VerificationsApi:
     ) -> ApiResponse[List[EmailValidationResult]]:
         """Get Emails Verification Results
 
-        Returns a results of all verified single emails. Required Access Level: VerifyEmails
+        Returns a results of all verified single emails. Required Access Level: ViewVerifyEmails
 
         :param limit: Maximum number of returned items.
         :type limit: int
@@ -2540,7 +2564,7 @@ class VerificationsApi:
     ) -> RESTResponseType:
         """Get Emails Verification Results
 
-        Returns a results of all verified single emails. Required Access Level: VerifyEmails
+        Returns a results of all verified single emails. Required Access Level: ViewVerifyEmails
 
         :param limit: Maximum number of returned items.
         :type limit: int
@@ -2606,7 +2630,9 @@ class VerificationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2625,11 +2651,12 @@ class VerificationsApi:
 
 
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

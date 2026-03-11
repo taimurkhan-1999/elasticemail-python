@@ -7,8 +7,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **content** | [**List[CampaignTemplate]**](CampaignTemplate.md) | Campaign&#39;s email content. Provide multiple items to send an A/X Split Campaign | [optional] 
 **name** | **str** | Campaign name | 
-**status** | [**CampaignStatus**](CampaignStatus.md) |  | [optional] 
+**status** | [**CampaignStatus**](CampaignStatus.md) |  | [optional] [default to CampaignStatus.DELETED]
 **recipients** | [**CampaignRecipient**](CampaignRecipient.md) |  | 
+**excluded_recipients** | [**CampaignRecipient**](CampaignRecipient.md) |  | [optional] 
 **options** | [**CampaignOptions**](CampaignOptions.md) |  | [optional] 
 
 ## Example

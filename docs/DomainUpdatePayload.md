@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**certificate_status** | [**CertificateValidationStatus**](CertificateValidationStatus.md) |  | [optional] 
+**certificate_status** | [**CertificateValidationStatus**](CertificateValidationStatus.md) |  | [optional] [default to CertificateValidationStatus.ERROROCCURED]
 **verp** | **bool** |  | [optional] 
 **custom_bounces_domain** | **str** |  | [optional] 
 **is_custom_bounces_domain_default** | **bool** |  | [optional] 
