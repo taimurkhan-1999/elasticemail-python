@@ -1,3 +1,8 @@
+# Send Transactional Emails With Attachment
+
+This example is aligned with the current SDK and can be run directly from `examples/functions/sendTransactionalEmailsWithAttachment.py`.
+
+```python
 import ElasticEmail
 from pprint import pprint
 import base64
@@ -7,7 +12,7 @@ configuration = ElasticEmail.Configuration(
     host = "https://api.elasticemail.com/v4"
 )
 
-configuration.api_key['apikey'] = "YOUR_API_KEY"
+configuration.api_key['apikey'] = "6E313A3326A5C0A3D0C5F32916BE6EE3E858AA4C068829DEF4B6D21E0A12971AD60B3F92330DFDD1F193916BDE8444AF"
 
 with ElasticEmail.ApiClient(configuration) as api_client:
     api_instance = ElasticEmail.EmailsApi(api_client)
@@ -58,3 +63,10 @@ with ElasticEmail.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling EmailsApi->emails_transactional_post: %s\n" % e)
+```
+
+Run with:
+
+```bash
+py -3 sendTransactionalEmailsWithAttachment.py
+```
